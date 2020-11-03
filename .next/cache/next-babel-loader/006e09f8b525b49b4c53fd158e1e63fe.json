@@ -1,0 +1,1 @@
+{"ast":null,"code":"// const path = `${process.env.REACT_APP_HOST}:${process.env.REACT_APP_PORT}/${process.env.REACT_APP_API_VERSION}/auth`;\nvar path = \"http://localhost:5000/api/v1/\";\nexport default path;","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import axios from 'axios';\nimport path from './path';\nconst userPath = path + 'user';\nexport const getUserInfo = uid => axios.post(`${userPath}`, {\n  uid\n}).then(results => results.data).catch(err => console.log(err));","map":null,"metadata":{},"sourceType":"module"}
