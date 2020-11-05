@@ -19,3 +19,18 @@ export const updateUserInfo = info => ({
     type: types.UPDATE_USER_INFO,
     info,
 });
+
+export const updateSearchInput = ticker => ({
+    type: types.UPDATE_SEARCH_INPUT,
+    ticker,
+});
+
+export const updateSidePanel = opened => ({
+    type: types.UPDATE_SIDE_PANEL,
+    opened,
+});
+
+export const updateStockInfo = stockInfo => ({
+    type: types.UPDATE_STOCK_INFO,
+    stockInfo,
+});

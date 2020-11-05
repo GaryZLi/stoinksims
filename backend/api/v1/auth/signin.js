@@ -1,25 +1,19 @@
-import firebase from 'firebase';
 import { getIp } from '../../../utils/ip';
+import { signIn } from '../../../utils/firebase';
 import {
     updateWhitelist,
 } from '../../../utils/whitelist';
 
-const login = (req, res) => {
-    const { email, password } = req.body;
 
-    firebase.auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(results => {
-            const uid = results.user.uid;
-            
+const signInHandler = (req, res) => {
+    const {email, password} = req.body;
+
+    signIn(email, password)
+        .then(uid => {
             updateWhitelist(getIp(req), uid);
-
-            res
-                .status(200)
-                .send({ uid: uid});
-
+            res.status(200).send({uid});
         })
         .catch(err => res.status(500).send(err));
 };
 
-export default login;
+export default signInHandler;

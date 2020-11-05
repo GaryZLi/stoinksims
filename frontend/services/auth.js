@@ -7,7 +7,9 @@ export const isLoggedIn = () => (
     axios
         .get(`${authPath}`)
         .then(results => results.data.uid)
-        .catch(err => console.log(err))
+        .catch(err => {
+            throw err;
+        })
 );
 
 export const signIn = (email, password) => (
@@ -17,7 +19,9 @@ export const signIn = (email, password) => (
             password
         })
         .then(results => results.data.uid)
-        .catch(err => console.log(err))
+        .catch(err => {
+            throw err;
+        })
 );
 
 export const signUp = (firstName, lastName, email, password) => (
@@ -29,5 +33,7 @@ export const signUp = (firstName, lastName, email, password) => (
             password
         })
         .then(results => results.data.uid)
-        .catch(err => console.log(err))
+        .catch(err => {
+            throw err;
+        })
 );

@@ -1,1 +1,0 @@
-{"ast":null,"code":"import App from '../frontend/index.js';\nexport default App;","map":{"version":3,"sources":["C:/Users/gxlizy/Desktop/javascript/stoinksims/pages/index.js"],"names":["App"],"mappings":"AAAA,OAAOA,GAAP,MAAgB,sBAAhB;AAEA,eAAeA,GAAf","sourcesContent":["import App from '../frontend/index.js';\r\n\r\nexport default App;"]},"metadata":{},"sourceType":"module"}

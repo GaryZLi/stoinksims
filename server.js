@@ -11,8 +11,6 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handler = app.getRequestHandler();
 
-app.render()
-
 app.prepare()
 .then(() => {
     const server = express();

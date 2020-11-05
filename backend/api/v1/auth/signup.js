@@ -1,9 +1,9 @@
-import firebase from 'firebase';
 import pool from '../../../database/database';
 import { updateWhitelist } from '../../../utils/whitelist';
 import { getIp } from '../../../utils/ip';
+import { signUp } from '../../../utils/firebase';
 
-const signup = (req, res) => {
+const signUpHandler = (req, res) => {
     const {
         firstName,
         lastName,
@@ -11,10 +11,8 @@ const signup = (req, res) => {
         password,
     } = req.body;
 
-    firebase.auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then(results => {
-            const uid = results.user.uid;
+        signUp(email, password)
+        .then(uid => {
             pool.query(
                 `
                 INSERT INTO Users(uid, firstName, lastName)
@@ -36,4 +34,4 @@ const signup = (req, res) => {
         .catch(err => res.status(500).send(err));
 };
 
-export default signup;
+export default signUpHandler;

@@ -1,17 +1,17 @@
 import { Router } from 'express';
-import isLoggedIn from './isLoggedIn';
-import signin from './signin';
-import signup from './signup';
-import forgotpassword from './forgotpassword';
+import isLoggedInHandler from './isLoggedIn';
+import signInHandler from './signIn';
+import signUpHandler from './signUp';
+import forgotPasswordHandler from './forgotPassword';
 
 const router = new Router();
 
-router.get('/', isLoggedIn);
+router.get('/', isLoggedInHandler);
 
-router.post('/signin', signin);
+router.post('/signin', signInHandler);
 
-router.post('/signup', signup);
+router.post('/signup', signUpHandler);
 
-router.post('/forgotpassword', forgotpassword);
+router.post('/forgotpassword', forgotPasswordHandler);
 
 export default router;

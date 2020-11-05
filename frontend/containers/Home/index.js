@@ -11,6 +11,9 @@ const useStyles = makeStyles({
     root: {
         height: '100%',
         width: '100%',
+        display: 'flex',
+
+        backgroundColor: 'blue'
     },
 });
 
@@ -25,7 +28,66 @@ const Home = ({
 
     return (
         <div className={classes.root}>
-            {uid}
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
+            <div style={{height: 30, width: 30, backgroundColor: 'red'}}>
+                {uid}
+            </div>
         </div>
     );
 };

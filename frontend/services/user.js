@@ -9,5 +9,7 @@ export const getUserInfo = uid => (
             uid
         })
         .then(results => results.data)
-        .catch(err => console.log(err))
+        .catch(err => {
+            throw err;
+        })
 );

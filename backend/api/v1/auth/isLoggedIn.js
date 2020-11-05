@@ -3,10 +3,10 @@ import {
 } from '../../../utils/whitelist';
 import { getIp } from '../../../utils/ip';
 
-const isLoggedIn = (req, res) => {
+const isLoggedInHandler = (req, res) => {
     const uid = isWhitelisted(getIp(req));
 
-    res.status(200).send({uid: uid});
+    res.status(200).send({ uid });
 };
 
-export default isLoggedIn;
+export default isLoggedInHandler;

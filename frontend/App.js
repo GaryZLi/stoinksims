@@ -15,6 +15,14 @@ const useStyles = makeStyles({
         height: '100%',
         width: '100%',
         display: 'flex',
+    },
+    container: {
+        // height: '100%',
+        // width: '100%',
+        flex: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
 
@@ -34,8 +42,10 @@ const App = ({
             setInitialRender(false);
         })
         .catch(err => {
-            console.log(err);
             setInitialRender(false);
+            const status = err.response;
+            
+            // TODO handle the status errors
         });
 
     }, []);
@@ -47,7 +57,9 @@ const App = ({
             <div className={classes.root}>
                 <Loading />
                 <SidePanel/>
-                <Component {...pageProps} />
+                <div className={classes.container}>
+                    <Component {...pageProps} />
+                </div>
             </div>
         );
     }
