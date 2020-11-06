@@ -13,20 +13,25 @@ import {
     YAxis,
     Tooltip,
 } from 'recharts';
+import ChartActionButton from '../ChartActionButton';
 
 const useStyles = makeStyles({
     root: {
         height: 500,
-        width: 700,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     title: {
         height: 100,
+        width: '100%',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+
+        position: 'relative',
     },
+    
 });
 
 const BarChart = ({
@@ -43,19 +48,20 @@ const BarChart = ({
             className={classes.root}
             elevation={5}
         >
-            <Typography 
+            <Typography
                 className={classes.title}
                 variant='h4'
             >
                 {symbol}
+                <ChartActionButton/>
             </Typography>
             <ResponsiveContainer>
                 <BC
                     data={data}
                     margin={{
-                        top: 10, 
-                        right: 50, 
-                        left: 30, 
+                        top: 10,
+                        right: 50,
+                        left: 30,
                         bottom: 30,
                     }}
                 >
@@ -65,8 +71,9 @@ const BarChart = ({
                     />
                     <YAxis
                         domain={[0, 'dataMax + dataMax * 0.1']}
+                        tickFormatter={tick => tick.toLocaleString()}
                     />
-                    <Tooltip />
+                    <Tooltip formatter={item => item.toLocaleString()} />
                     <Bar
                         dataKey="volume"
                         fill="#598ad4"

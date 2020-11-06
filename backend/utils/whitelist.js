@@ -1,11 +1,10 @@
 const whitelist = {};
 
 export const isWhitelisted = ip => {
-    console.log(whitelist, ip, 'iswhitelidtsed');
     // return whitelist[ip];
 
     // return undefined;
-    return 'fhDKJ48xrvO4iVuZWxc1EAPvABv2';
+    return 'VpqHAaPGDwRi54fRvJrPDITDek93';
 };
 
 export const updateWhitelist = (ip, uid) => {

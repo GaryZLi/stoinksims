@@ -7,6 +7,8 @@ import { getIp } from '../../utils/ip';
 
 const router = new Router();
 
+router.use('/auth', authRoute);
+
 router.use((req, res, next) => {
     if (isWhitelisted(getIp(req)) !== undefined) {
         next();
@@ -16,7 +18,6 @@ router.use((req, res, next) => {
     }
 })
 
-router.use('/auth', authRoute);
 router.use('/user', userRoute);
 router.use('/stock', stockRoute);
 

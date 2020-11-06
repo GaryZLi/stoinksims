@@ -47,3 +47,11 @@ export const getTickerInfo = async ticker => {
         news,
     };
 };
+
+export const getPrice = ticker => (
+    iex.
+        symbol(ticker)
+        .price()
+        .then(result => result)
+        .catch(err => err)
+);

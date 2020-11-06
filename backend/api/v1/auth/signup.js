@@ -15,10 +15,10 @@ const signUpHandler = (req, res) => {
         .then(uid => {
             pool.query(
                 `
-                INSERT INTO Users(uid, firstName, lastName)
-                VALUES ($1, $2, $3)
+                INSERT INTO Users(uid, firstName, lastName, buyingPower)
+                VALUES ($1, $2, $3, $4)
                 `,
-                [uid, firstName, lastName]
+                [uid, firstName, lastName, 10000]
             )
                 .then(() => {
                     res

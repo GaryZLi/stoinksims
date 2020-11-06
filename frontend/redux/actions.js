@@ -34,3 +34,24 @@ export const updateStockInfo = stockInfo => ({
     type: types.UPDATE_STOCK_INFO,
     stockInfo,
 });
+
+export const updateChartType = chartType => ({
+    type: types.UPDATE_CHART_TYPE,
+    chartType,
+});
+
+export const updateBuyingPower = buyingPower => ({
+    type: types.UPDATE_BUYING_POWER,
+    buyingPower,
+});
+
+export const updateShares = (symbol, shares) => ({
+    type: types.UPDATE_SHARES,
+    symbol,
+    shares,
+});
+
+export const updatePortfolio = portfolio => ({
+    type: types.UPDATE_PORTFOLIO,
+    portfolio,
+});

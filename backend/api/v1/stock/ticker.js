@@ -12,7 +12,7 @@ const tickerHandler = async (req, res) => {
         .then(result => result)
         .catch(() => res.status(500).end());
 
-    res
+        res
         .status(200)
         .send({
             ...tickerInfo,

@@ -45,7 +45,7 @@ import { getTickerInfo } from '../backend/utils/iex';
   // .catch(err => console.log('eerr', err))
   
 
-axios.get('http://localhost:5000/api/v1/stock/amzn')
+axios.get('http://localhost:7000/api/v1/earrings')
 .then(res => console.log(res))
 
   

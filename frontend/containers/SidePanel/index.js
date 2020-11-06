@@ -18,13 +18,9 @@ import {
     HomeOutlined,
     History,
 } from '@material-ui/icons';
+
 import {
-    getUserInfo,
-} from '../../services/user';
-import {
-    updateUserInfo,
     updateSidePanel,
-    updateLoading,
 } from '../../redux/actions';
 
 const useStyles = makeStyles({
@@ -37,6 +33,10 @@ const useStyles = makeStyles({
         transition: 'all 0.5s ease-out',
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
+        borderTopLeftRadius: 0,
+        borderBottomLeftRadius: 0,
+
+        backgroundColor: 'rgba(17, 91, 240, 0.2)',
     },
     greetingText: {
         display: 'flex',
@@ -75,24 +75,9 @@ const SidePanel = ({
     firstName,
     lastName,
     sidePanelOpened,
-    updateUserInfo,
     updateSidePanel,
-    updateLoading,
 }) => {
     const classes = useStyles();
-
-    useEffect(() => {
-        updateLoading(true);
-
-        getUserInfo(uid)
-        .then(result => {
-            updateUserInfo(result);
-            updateLoading(false);
-        })
-        .catch(err => {
-            updateLoading(false);
-        })
-    }, []);
     
     const handleDrawer = () => updateSidePanel(!sidePanelOpened);
     
@@ -169,9 +154,7 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = {
-    updateUserInfo,
     updateSidePanel,
-    updateLoading,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidePanel);

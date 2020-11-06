@@ -1,33 +1,11 @@
 import { Router } from 'express';
-import pool from '../../../database/database';
-import { getIp } from '../../../utils/ip';
-import {
-    isWhitelisted,
-    updateWhitelist,
-} from '../../../utils/whitelist';
+import infoHandler from './info';
+import portfolioHandler from './portfolio';
 
 const router = new Router();
 
-router.post('/', (req, res) => {
+router.post('/', infoHandler);
 
-    if (isWhitelisted(getIp(req))) {
-        const {uid} = req.body;
-
-        pool
-        .query(
-            `
-            select *
-            from users
-            where uid=$1
-            `,
-            [uid]
-        )
-        .then(results => res.status(200).send(results.rows[0]))
-        .catch(err => res.status(500).send(err));
-    }
-    else {
-        res.status(401).send();
-    }
-});
+router.post('/portfolio', portfolioHandler);
 
 export default router;

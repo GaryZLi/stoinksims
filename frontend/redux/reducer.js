@@ -7,9 +7,11 @@ const initialState = {
     ticker: '',
     firstName: '',
     lastName: '',
-    portfolioValue: null,
+    chartType: 'Price',
+    buyingPower: null,
     uid: undefined,
     stockInfo: undefined,
+    portfolio: {},
 };
 
 const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -37,7 +39,7 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
                 ...state,
                 firstName: action.info.firstname,
                 lastName: action.info.lastname,
-                portfolioValue: action.info.portfoliovalue,
+                buyingPower: parseFloat(action.info.buyingpower),
             };
 
         case types.UPDATE_SEARCH_INPUT:
@@ -56,6 +58,48 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
             return {
                 ...state,
                 stockInfo: action.stockInfo,
+            };
+
+        case types.UPDATE_CHART_TYPE:
+            return {
+                ...state,
+                chartType: action.chartType,
+            };
+
+        case types.UPDATE_BUYING_POWER:
+            return {
+                ...state,
+                buyingPower: parseFloat(action.buyingPower),
+            };
+
+        case types.UPDATE_SHARES:
+            return {
+                ...state,
+                portfolio: {
+                    ...state.portfolio,
+                    [action.symbol]: {
+                        ...state.portfolio[action.symbol],
+                        shares: action.shares,
+                    },
+                },
+            };
+
+        case types.UPDATE_PORTFOLIO:
+            const rows = action.portfolio;
+            const portfolio = {};
+
+            for (const row of rows) {
+                portfolio[row.symbol] = {
+                    shares: row.shares,
+                    worth: parseFloat(row.worth),
+                };
+            }
+
+            return {
+                ...state,
+                portfolio: {
+                    ...portfolio,
+                },
             };
 
         default:

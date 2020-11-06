@@ -13,19 +13,22 @@ import {
     YAxis, 
     Tooltip, 
 } from 'recharts';
+import ChartActionButton from '../ChartActionButton';
 
 const useStyles = makeStyles({
     root: {
         height: 500,
-        width: 700,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     title: {
         height: 100,
+        width: '100%',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
     },
 });
 
@@ -48,6 +51,7 @@ const LineChart = ({
                 variant='h4'
             >
                 {symbol}
+                <ChartActionButton/>
             </Typography>
             <ResponsiveContainer>
                 <LC
@@ -65,8 +69,9 @@ const LineChart = ({
                     />
                     <YAxis
                         domain={[min => ~~(min - (min * 0.1)), max => ~~(max + (max * 0.1))]}
+                        tickFormatter={tick => tick.toLocaleString()}
                     />
-                    <Tooltip />
+                    <Tooltip formatter={item => [item.toLocaleString(), 'price']}/>
                     <Line
                         dataKey="close" 
                         fill="gray" 

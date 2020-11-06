@@ -40,7 +40,15 @@ const Search = ({
     };
 
     const handleSearch = () => {
-        if (ticker.length) {
+        if (!sidePanelOpened) {
+            updateSidePanel(true);
+
+            setTimeout(() => document.getElementById('searchField').focus(), 500);
+        }
+        else if (sidePanelOpened && !ticker.length) {
+            document.getElementById('searchField').focus();
+        }
+        else {
             updateLoading(true);
 
             getStockInfo(ticker)
@@ -67,16 +75,6 @@ const Search = ({
                 })
 
             Router.push('/stock');
-        }
-        else {
-            if (!sidePanelOpened) {
-                updateSidePanel(true);
-
-                setTimeout(() => document.getElementById('searchField').focus(), 500);
-            }
-            else {
-                document.getElementById('searchField').focus();
-            }
         }
     };
 
