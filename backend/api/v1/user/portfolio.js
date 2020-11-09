@@ -7,7 +7,7 @@ const portfolioHandler = (req, res) => {
     pool
         .query(
             `
-            select shares, symbol, worth
+            select shares, symbol
             from portfolio
             where uid=$1
             `,

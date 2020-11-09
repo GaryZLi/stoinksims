@@ -43,7 +43,7 @@ const bidHandler = async (req, res) => {
     const data = await pool
         .query(
             `
-            select shares, worth
+            select shares
             from portfolio
             where uid=$1 and symbol=$2
             `,
@@ -55,7 +55,7 @@ const bidHandler = async (req, res) => {
             res.status(500).end()
         });
 
-    const leftOver = buyingPower - total;
+    const newBuyingPower = buyingPower - total;
     let newShares;
 
     if (data === undefined) {
@@ -64,10 +64,10 @@ const bidHandler = async (req, res) => {
         await pool
             .query(
                 `
-                insert into portfolio(uid, symbol, shares, worth)
-                values ($1, $2, $3, $4)
+                insert into portfolio(uid, symbol, shares)
+                values ($1, $2, $3)
                 `,
-                [uid, symbol, shares, total]
+                [uid, symbol, shares]
             )
             .then()
             .catch(err => {
@@ -82,10 +82,10 @@ const bidHandler = async (req, res) => {
             .query(
                 `
                 update portfolio
-                set shares=$3, worth=$4
+                set shares=$3
                 where uid=$1 and symbol=$2
                 `,
-                [uid, symbol, newShares, parseFloat(data.worth) + total]
+                [uid, symbol, newShares]
             )
             .then()
             .catch(err => {
@@ -101,7 +101,7 @@ const bidHandler = async (req, res) => {
                 set buyingPower=$2
                 where uid=$1
                 `,
-            [uid, leftOver]
+            [uid, newBuyingPower]
         )
         .then()
         .catch(err => {
@@ -109,11 +109,22 @@ const bidHandler = async (req, res) => {
             res.status(500).end()
         });
 
+    pool
+        .query(
+            `
+                insert into transactions(uid, date, symbol, price, shares, action)
+                values ($1, $2, $3, $4, $5, $6)
+            `,
+            [uid, new Date(), symbol, price, shares, 'buy']
+        )
+        .then()
+        .catch(err => console.log(err));
+
     res
         .status(200)
         .send({
             msg: `Executed at $${price} per share.`,
-            buyingPower: leftOver,
+            buyingPower: newBuyingPower,
             shares: newShares,
         });
 };

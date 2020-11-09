@@ -4,6 +4,10 @@ import {parse}  from 'node-html-parser';
 import { iex } from '../backend/utils/iex';
 
 import {
+  exec
+} from 'child_process';
+
+import {
   parseHistoricalData, requestHistoricalData,
 } from '../backend/utils/historicalData';
 
@@ -45,10 +49,22 @@ import { getTickerInfo } from '../backend/utils/iex';
   // .catch(err => console.log('eerr', err))
   
 
-axios.get('http://localhost:7000/api/v1/earrings')
-.then(res => console.log(res))
-
   
+// axios.get('http://localhost:7000/api/v1/earrings')
+// .then(res => console.log(res))
+
+const a = axios.post('http://localhost:5000/api/v1/user', {
+  uid: 'VpqHAaPGDwRi54fRvJrPDITDek93'
+})
+.then(res => 'res.data[]')
+ .catch(err=>err) 
+
+ Promise.all([
+   a,
+   a,a,a,a,a
+ ])
+ .then(res => console.log(res))
+
   // V1C7UTDLXKFNFDTS
 
   // 30P7X37IUEIZ8T5C

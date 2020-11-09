@@ -22,15 +22,11 @@ import {
 const useStyles = makeStyles({
     root: {
         height: '100%',
-        width: '100%',
+        // width: '100%',
         display: 'flex',
+        flexDirection: 'row',
+        overflow: 'auto',
     },
-    container: {
-        // flex: 1,
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-    }
 });
 
 const App = ({
@@ -56,6 +52,10 @@ const App = ({
                 const status = err.response;
 
                 // TODO handle the status errors
+
+                if (status === 401) {
+                    updateUserLoginState(false);
+                }
             });
 
     }, []);
@@ -70,17 +70,31 @@ const App = ({
                     updateLoading(false);
                 })
                 .catch(err => {
-                    updateLoading(false);
+                    setInitialRender(false);
+                    const status = err.response;
+
+                    // TODO handle the status errors
+
+                    if (status === 401) {
+                        updateUserLoginState(false);
+                    }
                 })
 
             getUserPortfolio(uid)
-            .then(result => {
-                updateLoading(false);
-                updatePortfolio(result);
-            })
-            .catch(err => {
-                updateLoading(false);
-            })
+                .then(result => {
+                    updateLoading(false);
+                    updatePortfolio(result);
+                })
+                .catch(err => {
+                    setInitialRender(false);
+                    const status = err.response;
+
+                    // TODO handle the status errors
+
+                    if (status === 401) {
+                        updateUserLoginState(false);
+                    }
+                })
         }
     }, [uid]);
 
@@ -92,8 +106,6 @@ const App = ({
                 <Loading />
                 <SidePanel />
                 <Component {...pageProps} />
-                {/* <div className={classes.container}>
-                </div> */}
             </div>
         );
     }

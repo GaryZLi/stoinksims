@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import Link from 'next/link';
 import { makeStyles } from '@material-ui/styles';
 import { connect } from 'react-redux';
@@ -35,8 +35,6 @@ const useStyles = makeStyles({
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 0,
         borderBottomLeftRadius: 0,
-
-        backgroundColor: 'rgba(17, 91, 240, 0.2)',
     },
     greetingText: {
         display: 'flex',
@@ -71,7 +69,7 @@ const getTimeOfDay = hour => {
 };
 
 const SidePanel = ({
-    uid,
+    // uid,
     firstName,
     lastName,
     sidePanelOpened,
@@ -89,13 +87,13 @@ const SidePanel = ({
         },
         {
             icon: <MonetizationOnOutlined />,
-            href: '',
+            href: 'portfolio',
             component: <ListItemText primary='Portfolio' />,
         },
         {
             icon: <History />,
-            href: '',
-            component: <ListItemText primary='History' />,
+            href: 'transactions',
+            component: <ListItemText primary='Transactions' />,
         }
     ];
 
@@ -142,12 +140,12 @@ const SidePanel = ({
 };
 
 const mapStateToProps = ({
-    uid,
+    // uid,
     firstName,
     lastName,
     sidePanelOpened,
 }) => ({
-    uid,
+    // uid,
     firstName,
     lastName,
     sidePanelOpened,

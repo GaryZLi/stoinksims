@@ -7,6 +7,7 @@ import Transaction from './Transaction';
 const useStyles = makeStyles({
     root: {
         width: '100%',
+        minWidth: 900,
         display: 'flex',
         overflow: 'auto',
         flexDirection: 'column',
@@ -37,6 +38,7 @@ const Stock = ({
     chartType,
     sidePanelOpened,
     portfolio,
+    loading,
 }) => {
     const classes = useStyles();
 
@@ -66,7 +68,7 @@ const Stock = ({
                     symbol={stockInfo.symbol}
                     sidePanelOpened={sidePanelOpened}
                     price={stockInfo.close}
-                    shares={portfolio[stockInfo.symbol]?.shares}
+                    shares={portfolio[stockInfo.symbol]}
                 />
             </div>
         </div>
@@ -78,11 +80,13 @@ const mapStateToProps = ({
     chartType,
     sidePanelOpened,
     portfolio,
+    loading,
 }) => ({
     stockInfo,
     chartType,
     sidePanelOpened,
     portfolio,
+    loading,
 });
 
 export default connect(mapStateToProps)(Stock);

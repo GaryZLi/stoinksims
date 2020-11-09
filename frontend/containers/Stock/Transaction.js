@@ -13,8 +13,9 @@ import {
     updateBuyingPower,
     updateShares,
 } from '../../redux/actions';
-import { 
+import {
     buyShares,
+    askShares,
 } from '../../services/stock';
 import { connect } from 'react-redux';
 
@@ -79,38 +80,68 @@ const Transaction = ({
 
     const handleClick = () => {
         if (!shareInput.length) return;
-        console.log('herah')
+
         if (state === 'Sell' && (shareInput > shares || !shares)) {
-            return setMsg('Not enough shares!');
+            return setMsg({
+                msg: "You don't have enough shares!",
+                color: 'red',
+            });
         }
         else if (state === 'Buy') {
             updateLoading(true);
 
             buyShares(uid, symbol, shareInput)
-            .then(res => {
-                updateLoading(false);
-                updateBuyingPower(res.buyingPower);
-                updateShares(symbol, res.shares);
-                setMsg({
-                    msg: res.msg,
-                    color: 'green',
-                });
-            })
-            .catch(err => {
-                updateLoading(false);
-
-                if (err.response) {
+                .then(res => {
+                    updateLoading(false);
+                    updateBuyingPower(res.buyingPower);
+                    updateShares(symbol, res.shares);
                     setMsg({
-                        msg: err.response.data,
-                        color: 'red',
+                        msg: res.msg,
+                        color: 'green',
                     });
-                }
-            });
+                })
+                .catch(err => {
+                    updateLoading(false);
+
+                    if (err.response) {
+                        setMsg({
+                            msg: err.response.data,
+                            color: 'red',
+                        });
+                    }
+                });
+        }
+        else if (state === 'Sell') {
+            updateLoading(true);
+
+            askShares(uid, symbol, shareInput)
+                .then(res => {
+                    updateLoading(false);
+                    updateBuyingPower(res.buyingPower);
+                    updateShares(symbol, res.shares);
+                    setMsg({
+                        msg: res.msg,
+                        color: 'green',
+                    });
+                })
+                .catch(err => {
+                    updateLoading(false);
+
+                    if (err.response) {
+                        setMsg({
+                            msg: err.response.data,
+                            color: 'red',
+                        });
+                    }
+                });
         }
     };
 
     const changeState = state => {
-        setMsg(undefined);
+        setMsg({
+            msg: '',
+            color: '',
+        });
         setState(state);
     };
 
@@ -149,10 +180,10 @@ const Transaction = ({
             <Divider />
             <div className={classes.container}>
                 <div className={classes.fields}>
-                    Buying power: ${buyingPower? buyingPower.toLocaleString() : 0}
+                    Buying power: ${buyingPower ? buyingPower.toLocaleString() : 0}
                 </div>
                 <div className={classes.fields}>
-                    Current: {shares? shares.toLocaleString() : 0} {symbol} shares
+                    Current: {shares ? shares.toLocaleString() : 0} {symbol} shares
                 </div>
                 <div className={classes.fields}>
                     {symbol} Price: ${price?.toLocaleString()}
@@ -163,7 +194,7 @@ const Transaction = ({
                         paddingRight: 5,
                     }}>
                         Shares
-                    </div> 
+                    </div>
                     <TextField
                         className={classes.textField}
                         value={shareInput}
@@ -181,7 +212,7 @@ const Transaction = ({
                     {state}
                 </Button>
                 {msg.msg && (
-                    <div 
+                    <div
                         className={classes.msg}
                         style={{
                             color: msg.color,

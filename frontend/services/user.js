@@ -16,8 +16,30 @@ export const getUserInfo = uid => (
 
 export const getUserPortfolio = uid => (
     axios
-        .post(userPath+'portfolio', {
+        .post(userPath + 'portfolio', {
             uid
+        })
+        .then(results => results.data)
+        .catch(err => {
+            throw err;
+        })
+);
+
+export const getUserTransactions = uid => (
+    axios
+        .post(userPath + 'transactions', {
+            uid
+        })
+        .then(results => results.data)
+        .catch(err => {
+            throw err;
+        })
+);
+
+export const getUserWorth = stocks => (
+    axios
+        .post(userPath + 'worth', {
+            stocks,
         })
         .then(results => results.data)
         .catch(err => {

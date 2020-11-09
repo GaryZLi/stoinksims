@@ -12,6 +12,9 @@ const initialState = {
     uid: undefined,
     stockInfo: undefined,
     portfolio: {},
+    stockPrices: {},
+    transactions: [],
+    totalStockWorth: 0,
 };
 
 const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -77,10 +80,7 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
                 ...state,
                 portfolio: {
                     ...state.portfolio,
-                    [action.symbol]: {
-                        ...state.portfolio[action.symbol],
-                        shares: action.shares,
-                    },
+                    [action.symbol]: action.shares,
                 },
             };
 
@@ -89,10 +89,7 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
             const portfolio = {};
 
             for (const row of rows) {
-                portfolio[row.symbol] = {
-                    shares: row.shares,
-                    worth: parseFloat(row.worth),
-                };
+                portfolio[row.symbol] = row.shares;
             }
 
             return {
@@ -100,6 +97,24 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
                 portfolio: {
                     ...portfolio,
                 },
+            };
+
+        case types.UPDATE_TRANSACTIONS:
+            return {
+                ...state,
+                transactions: action.transactions,
+            };
+
+        case types.UPDATE_TOTAL_STOCK_WORTH:
+            return {
+                ...state,
+                totalStockWorth: action.totalStockWorth,
+            };
+
+        case types.UPDATE_STOCK_PRICES:
+            return {
+                ...state,
+                stockPrices: action.stockPrices,
             };
 
         default:

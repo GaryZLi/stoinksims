@@ -5,7 +5,7 @@ const stockPath = path + 'stock/';
 
 export const getStockInfo = ticker => (
     axios
-        .get(stockPath+ticker)
+        .get(stockPath + ticker)
         .then(results => results.data)
         .catch(err => {
             throw err
@@ -14,7 +14,20 @@ export const getStockInfo = ticker => (
 
 export const buyShares = (uid, symbol, shares) => (
     axios
-        .post(stockPath+'bid', {
+        .post(stockPath + 'bid', {
+            uid,
+            symbol,
+            shares,
+        })
+        .then(results => results.data)
+        .catch(err => {
+            throw err;
+        })
+);
+
+export const askShares = (uid, symbol, shares) => (
+    axios
+        .post(stockPath + 'ask', {
             uid,
             symbol,
             shares,

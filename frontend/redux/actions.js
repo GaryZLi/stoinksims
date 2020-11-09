@@ -55,3 +55,18 @@ export const updatePortfolio = portfolio => ({
     type: types.UPDATE_PORTFOLIO,
     portfolio,
 });
+
+export const updateTransactions = transactions => ({
+    type: types.UPDATE_TRANSACTIONS,
+    transactions,
+});
+
+export const updateTotalStockWorth = totalStockWorth => ({
+    type: types.UPDATE_TOTAL_STOCK_WORTH,
+    totalStockWorth,
+});
+
+export const updateStockPrices = stockPrices => ({
+    type: types.UPDATE_STOCK_PRICES,
+    stockPrices,
+});
