@@ -4,7 +4,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import './backend/config';
 
-import apiV1Routes from './backend/api/v1';
+import apiV1Routes from './pages/api/v1';
 
 const dev = process.env.NODE_ENV !== 'production';
 

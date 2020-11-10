@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import {
     isWhitelisted,
     updateWhitelist,
-} from '../../../utils/whitelist';
+} from '../../../../backend/utils/whitelist';
 
 const forgotpassword = (req, res) => {
     const { email } = req.body;

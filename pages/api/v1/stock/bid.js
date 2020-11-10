@@ -1,5 +1,5 @@
-import pool from '../../../database/database';
-import { getPrice } from '../../../utils/iex';
+import pool from '../../../../backend/database/database';
+import { getPrice } from '../../../../backend/utils/iex';
 
 const bidHandler = async (req, res) => {
     const {

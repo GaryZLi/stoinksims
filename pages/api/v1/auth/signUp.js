@@ -1,7 +1,7 @@
-import pool from '../../../database/database';
-import { updateWhitelist } from '../../../utils/whitelist';
-import { getIp } from '../../../utils/ip';
-import { signUp } from '../../../utils/firebase';
+import pool from '../../../../backend/database/database';
+import { updateWhitelist } from '../../../../backend/utils/whitelist';
+import { getIp } from '../../../../backend/utils/ip';
+import { signUp } from '../../../../backend/utils/firebase';
 
 const signUpHandler = (req, res) => {
     const {

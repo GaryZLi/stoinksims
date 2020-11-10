@@ -1,4 +1,4 @@
-import pool from '../../../database/database';
+import pool from '../../../../backend/database/database';
 
 const infoHandler = (req, res) => {
 

@@ -1,13 +1,14 @@
-import pool from '../../../database/database';
+import pool from '../../../../backend/database/database';
 
-const transactionsHandler = (req, res) => {
+const portfolioHandler = (req, res) => {
+
     const { uid } = req.body;
 
     pool
         .query(
             `
-            select *
-            from transactions
+            select shares, symbol
+            from portfolio
             where uid=$1
             `,
             [uid]
@@ -16,4 +17,4 @@ const transactionsHandler = (req, res) => {
         .catch(err => res.status(500).send(err));
 };
 
-export default transactionsHandler;
+export default portfolioHandler;

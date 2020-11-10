@@ -1,5 +1,5 @@
-import { requestHistoricalData } from "../../../utils/historicalData";
-import { getTickerInfo } from '../../../utils/iex';
+import { requestHistoricalData } from "../../../../backend/utils/historicalData";
+import { getTickerInfo } from '../../../../backend/utils/iex';
 
 const tickerHandler = async (req, res) => {
     const { ticker } = req.params;

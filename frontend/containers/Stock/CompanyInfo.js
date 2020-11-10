@@ -85,7 +85,6 @@ const CompanyInfo = ({
     stockInfo,
 }) => {
     const classes = useStyles();
-    console.log(stockInfo?.description)
 
     return (
         <Paper

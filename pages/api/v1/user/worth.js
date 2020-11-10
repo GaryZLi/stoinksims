@@ -1,4 +1,4 @@
-import { getPrice } from '../../../utils/iex';
+import { getPrice } from '../../../../backend/utils/iex';
 
 const worthHandler = (req, res) => {
     const {stocks} = req.body;

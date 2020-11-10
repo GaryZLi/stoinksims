@@ -1,7 +1,7 @@
 import { 
     isWhitelisted,
-} from '../../../utils/whitelist';
-import { getIp } from '../../../utils/ip';
+} from '../../../../backend/utils/whitelist';
+import { getIp } from '../../../../backend/utils/ip';
 
 const isLoggedInHandler = (req, res) => {
     const uid = isWhitelisted(getIp(req));

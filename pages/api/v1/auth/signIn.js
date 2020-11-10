@@ -1,8 +1,8 @@
-import { getIp } from '../../../utils/ip';
-import { signIn } from '../../../utils/firebase';
+import { getIp } from '../../../../backend/utils/ip';
+import { signIn } from '../../../../backend/utils/firebase';
 import {
     updateWhitelist,
-} from '../../../utils/whitelist';
+} from '../../../../backend/utils/whitelist';
 
 
 const signInHandler = (req, res) => {

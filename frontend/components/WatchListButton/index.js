@@ -24,13 +24,16 @@ const WatchListButton = ({
     updateWatchList
 }) => {
     const classes = useStyles();
+    const disabled = watchList?.find(item => item.symbol === stock)
+        ? true
+        : false;
 
     return (
         <Button
             className={classes.root}
             variant='contained'
             color='primary'
-            disabled={watchList?.find(item => item.symbol === stock) || false}
+            disabled={disabled}
             onClick={() => {
                 addToWatchList(uid, stock)
                 .then(() => {

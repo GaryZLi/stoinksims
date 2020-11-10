@@ -1,4 +1,4 @@
-import pool from '../../../database/database';
+import pool from '../../../../backend/database/database';
 
 export const addWatchListHandler = async (req, res) => {
     const {

@@ -2,8 +2,8 @@ import { Router } from 'express';
 import authRoute from './auth';
 import userRoute from './user';
 import stockRoute from './stock';
-import { isWhitelisted } from '../../utils/whitelist';
-import { getIp } from '../../utils/ip';
+import { isWhitelisted } from '../../../backend/utils/whitelist';
+import { getIp } from '../../../backend/utils/ip';
 
 const router = new Router();
 
