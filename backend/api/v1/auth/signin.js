@@ -12,7 +12,6 @@ const signInHandler = (req, res) => {
         .then(uid => {
             updateWhitelist(getIp(req), uid);
             res.status(200).send({uid});
-            console.log('heah')
         })
         .catch(err => res.status(500).end());
 };
