@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon -r esm server.js",
     "frontend": "next",
-    "start": "cross-env NODE_ENV=production node -r esm server.js",
+    "start": "next start",
     "build": "next build",
     "server": "nodemon -r esm trash/testServer.js",
     "test": "node -r esm trash/test.js"

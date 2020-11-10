@@ -14,7 +14,7 @@ const {
 } = require('../../../../utils/firebase');
 const pool = require('../../../../database/database');
 
-const signUpHandler = (req, res) => {
+const signUpHandler = async (req, res) => {
     const {
         firstName,
         lastName,
