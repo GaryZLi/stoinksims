@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const firebase = require('firebase');
 require('dotenv').config();
 
@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// console.log(firebase)
+console.log(firebase)
 
 module.exports = {
     // webpack: config => {

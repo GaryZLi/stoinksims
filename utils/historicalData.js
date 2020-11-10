@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { parse } from 'node-html-parser';
+const axios = require('axios');
+const { parse } = require('node-html-parser');
 
-export const requestHistoricalData = ticker => (
+const requestHistoricalData = ticker => (
     axios
         .get(`https://finance.yahoo.com/quote/${ticker}/history?p=${ticker}`)
         .then(result => parseHistoricalData(result.data))
@@ -10,8 +10,8 @@ export const requestHistoricalData = ticker => (
         })
 );
 
-export const parseHistoricalData = html => {
-    const table = Array.from(parse(html).querySelector('tbody').childNodes)
+const parseHistoricalData = html => {
+    const table = Array.from(requireparse(html).querySelector('tbody').childNodes)
     const result = [];
 
     for (let i = 0; i < 65; i++) {
@@ -27,4 +27,9 @@ export const parseHistoricalData = html => {
     }
 
     return result;
+};
+
+module.exports = {
+    requestHistoricalData,
+    parseHistoricalData,
 };

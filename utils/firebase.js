@@ -1,6 +1,6 @@
-import firebase from 'firebase';
+const firebase = require('firebase');
 
-export const signIn = (email, password) => (
+const signIn = (email, password) => (
     firebase.auth()
         .signInWithEmailAndPassword(email, password)
         .then(result => result.user.uid)
@@ -9,7 +9,7 @@ export const signIn = (email, password) => (
         })
 );
 
-export const signUp = (email, password) => (
+const signUp = (email, password) => (
     firebase.auth()
         .createUserWithEmailAndPassword(email, password)
         .then(result => result.user.uid)
@@ -17,3 +17,8 @@ export const signUp = (email, password) => (
             throw err;
         })
 );
+
+module.exports ={
+    signIn,
+    signUp,
+};

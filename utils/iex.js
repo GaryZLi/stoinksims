@@ -1,13 +1,13 @@
-import axios from 'axios';
-import { IEXCloudClient } from "node-iex-cloud";
+const axios = require('axios');
+const { IEXCloudClient } = require("node-iex-cloud");
 
-export const iex = new IEXCloudClient(axios, {
+const iex = new IEXCloudClient(axios, {
     sandbox: true,
     publishable: process.env.IEX_PUBLISHABLE_KEY,
     version: "stable"
 });
 
-export const getTickerInfo = async ticker => {
+const getTickerInfo = async ticker => {
     const companyInfo = await iex
         .symbol(ticker)
         .company()
@@ -39,7 +39,7 @@ export const getTickerInfo = async ticker => {
     };
 };
 
-export const getPrice = ticker => (
+const getPrice = ticker => (
     iex.
         symbol(ticker)
         .price()
@@ -48,3 +48,8 @@ export const getPrice = ticker => (
             throw err;
         })
 );
+
+module.exports = {
+    getTickerInfo,
+    getPrice,
+};
