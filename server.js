@@ -14,7 +14,7 @@ const handler = app.getRequestHandler();
 app.prepare()
 .then(() => {
     const server = express();
-    
+    console.log(__dirname, '-x-x-x-x-x-x--x-x-')
     server.use(express.json());
     server.use(cors());
     server.use(helmet());
