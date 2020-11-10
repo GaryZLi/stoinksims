@@ -1,32 +1,32 @@
 import { makeStyles } from '@material-ui/styles';
-import { connect } from 'react-redux';
+import HashLoader from 'react-spinners/HashLoader';
 
 const useStyles = makeStyles({
     root: {
         height: '100%',
         width: '100%',
-        backgroundColor: 'black',
         opacity: 0.5,
         position: 'fixed',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         zIndex: 10,
-    },
-    loading: {
-
     },
 });
 
-const Loading = ({loading}) => {
-    if (!loading) return <></>;
-
+const Loading = () => {
     const classes = useStyles();
     
     return (
         <div className={classes.root}>
-            Loading
+            <HashLoader
+                size={150}
+                loading
+                color='#123abc'
+            />
         </div>
     );
 };
 
-const mapStateToProps = ({ loading }) => ({ loading });
 
-export default connect(mapStateToProps)(Loading);
+export default Loading;

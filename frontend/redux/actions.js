@@ -70,3 +70,12 @@ export const updateStockPrices = stockPrices => ({
     type: types.UPDATE_STOCK_PRICES,
     stockPrices,
 });
+
+export const updateWatchList = watchList => ({
+    type: types.UPDATE_WATCH_LIST,
+    watchList,
+});
+
+export const updateInitialRender = () => ({
+    type: types.UPDATE_INITIAL_RENDER
+});

@@ -46,3 +46,24 @@ export const getUserWorth = stocks => (
             throw err;
         })
 );
+
+export const getUserWatchList = uid => (
+    axios
+        .get(userPath + 'watchlist/' + uid)
+        .then(results => results.data)
+        .catch(err => {
+            throw err;
+        })
+);
+
+export const addToWatchList = (uid, stock) => (
+    axios
+        .post(userPath + 'watchlist', {
+            uid,
+            stock,
+        })
+        .then(results => results.data)
+        .catch(err => {
+            throw err;
+        })
+);

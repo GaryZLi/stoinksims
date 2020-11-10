@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/styles';
-// import money from '../../picSrc/money.png';
 
 const useStyles = makeStyles({
     root: {
@@ -12,6 +11,7 @@ const useStyles = makeStyles({
     logo: {
         height: 60,
         width: 60,
+        backgroundImage: 'none'
     }
 });
 
@@ -20,11 +20,11 @@ const Logo = () => {
     
     return (
         <div className={classes.root}>
-            {/* <img 
+            <img 
                 className={classes.logo}
-                src={money} 
+                src='/money.png' 
                 alt='logo'
-            /> */}
+            />
         </div>
     );
 };

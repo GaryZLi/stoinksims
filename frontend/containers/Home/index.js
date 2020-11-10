@@ -7,7 +7,9 @@ import { getUserWorth } from '../../services/user';
 import { 
     updateTotalStockWorth,
     updateStockPrices,
+    updateInitialRender,
 } from '../../redux/actions';
+import Modal from './Modal';
 
 const useStyles = makeStyles({
     root: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles({
         display: 'flex',
         justifyContent: 'space-evenly',
         overflow: 'auto',
-        padding: '100px 20px',
+        padding: '50px 20px',
         position: 'relative',
         minWidth: 1200,
     },
@@ -44,7 +46,7 @@ const watchListColumns = [
         format: e => e,
     },
     {
-        label: 'shares',
+        label: 'owned',
         name: 'Owned',
         align: 'center',
         format: e => e ? 'Yes' : 'No',
@@ -52,13 +54,17 @@ const watchListColumns = [
 ];
 
 const Home = ({
-    sidePanelOpened,
+    firstName,
     portfolio,
+    watchList,
+    initialRender,
     updateTotalStockWorth,
     updateStockPrices,
+    updateInitialRender,
 }) => {
     const classes = useStyles();
-    const rows = [];
+    const stockRows = [];
+    const watchListRows = [];
 
     useEffect(() => {
         const stocks = [];
@@ -79,23 +85,40 @@ const Home = ({
 
                 updateTotalStockWorth(totalStockWorth);
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+
+                const status = err.response;
+
+                // TODO handle the status errors
+
+                if (status === 401) {
+                    updateUserLoginState(false);
+                }
+            });
 
     }, [portfolio]);
 
     for (const symbol in portfolio) {
-        rows.push({
+        stockRows.push({
             symbol,
             shares: portfolio[symbol],
         });
     }
 
+    for (const item of watchList) {
+        watchListRows.push({
+            symbol: item.symbol,
+            owned: portfolio[item.symbol],
+        });
+    }
+
     return (
         <div className={classes.root}>
+            {initialRender && <Modal firstName={firstName} setModal={updateInitialRender}/>}
             <Table
                 tableTitle='Stocks'
                 columns={stocksColumns}
-                rows={rows}
+                rows={stockRows}
                 width={200}
                 styles={{
                     position: 'sticky',
@@ -107,7 +130,7 @@ const Home = ({
             <Table
                 tableTitle='Watchlist'
                 columns={watchListColumns}
-                rows={[]}
+                rows={watchListRows}
                 width={200}
                 styles={{
                     position: 'sticky',
@@ -123,14 +146,21 @@ const Home = ({
 const states = ({
     sidePanelOpened,
     portfolio,
+    watchList,
+    firstName,
+    initialRender,
 }) => ({
     sidePanelOpened,
     portfolio,
+    watchList,
+    firstName,
+    initialRender,
 });
 
 const dispatch = {
     updateTotalStockWorth,
     updateStockPrices,
+    updateInitialRender,
 };
 
 export default connect(states, dispatch)(Home);

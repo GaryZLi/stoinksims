@@ -6,7 +6,10 @@ import {
 } from '@material-ui/core';
 import Table from '../../components/Table';
 import { getUserTransactions } from '../../services/user';
-import { updateTransactions } from '../../redux/actions';
+import { 
+    updateTransactions,
+    updateLoading,
+ } from '../../redux/actions';
 
 const columns = [
     {
@@ -58,14 +61,20 @@ const Transactions = ({
     transactions,
     sidePanelOpened,
     updateTransactions,
+    updateLoading,
 }) => {
     const classes = useStyles();
 
     useEffect(() => {
+        // updateLoading(true);
+
         getUserTransactions(uid)
-        .then(transactions => updateTransactions(transactions))
+        .then(transactions => {
+            // updateLoading(false);
+            updateTransactions(transactions);
+        })
         .catch(err => {
-            
+            // updateLoading(false);
             console.log(err, '-x-x-<<')
         })
     }, []);
@@ -102,6 +111,7 @@ const states = ({
 
 const dispatch = {
     updateTransactions,
+    updateLoading,
 };
 
 export default connect(states, dispatch)(Transactions);

@@ -13,10 +13,12 @@ import {
     updateUserInfo,
     updateUserLoginState,
     updatePortfolio,
+    updateWatchList,
 } from './redux/actions';
 import {
     getUserInfo,
     getUserPortfolio,
+    getUserWatchList,
 } from './services/user';
 
 const useStyles = makeStyles({
@@ -26,6 +28,14 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'row',
         overflow: 'auto',
+
+        backgroundColor: '#dbecff',
+
+    },
+    content: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
     },
 });
 
@@ -33,10 +43,12 @@ const App = ({
     Component,
     pageProps,
     uid,
+    loading,
     updateLoading,
     updateUserInfo,
     updateUserLoginState,
     updatePortfolio,
+    updateWatchList,
 }) => {
     const [initialRender, setInitialRender] = useState(true);
     const classes = useStyles();
@@ -61,7 +73,7 @@ const App = ({
     }, []);
 
     useEffect(() => {
-        if (uid) {
+        if (uid?.length) {
             updateLoading(true);
 
             getUserInfo(uid)
@@ -95,17 +107,38 @@ const App = ({
                         updateUserLoginState(false);
                     }
                 })
+
+            getUserWatchList(uid)
+                .then(res => {
+                    updateLoading(false);
+                    updateWatchList(res);
+                })
+                .catch(err => {
+                    setInitialRender(false);
+                    updateLoading(false);
+                    const status = err.response;
+
+                    // TODO handle the status errors
+
+                    if (status === 401) {
+                        updateUserLoginState(false);
+                    }
+                });
         }
     }, [uid]);
 
     if (initialRender) return <></>;
 
-    if (uid) {
+    if (uid?.length) {
         return (
             <div className={classes.root}>
-                <Loading />
                 <SidePanel />
-                <Component {...pageProps} />
+                <div className={classes.content}>
+                    {loading
+                        ? <Loading />
+                        : <Component {...pageProps} />
+                    }
+                </div>
             </div>
         );
     }
@@ -127,6 +160,7 @@ const mapDispatchToProps = {
     updateLoading,
     updateUserInfo,
     updatePortfolio,
+    updateWatchList,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -24,14 +24,6 @@ export const getTickerInfo = async ticker => {
             throw err;
         });
 
-    const news = await iex
-        .symbol(ticker)
-        .news()
-        .then(result => result)
-        .catch(err => {
-            throw err;
-        });
-
     const stats = await iex
         .symbol(ticker)
         .stats()
@@ -44,7 +36,6 @@ export const getTickerInfo = async ticker => {
         ...companyInfo,
         ...quoteInfo,
         ...stats,
-        news,
     };
 };
 
@@ -53,5 +44,7 @@ export const getPrice = ticker => (
         symbol(ticker)
         .price()
         .then(result => result)
-        .catch(err => err)
+        .catch(err => {
+            throw err;
+        })
 );

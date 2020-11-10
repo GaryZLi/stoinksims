@@ -64,17 +64,17 @@ const SignIn = ({
 
         if (loading) return;
         
-        updateLoading(true);
         
         signIn(email, password)
         .then(results => {
-            updateLoading(false);
+            // updateLoading(false);
             updateUserLoginState(results);
+            
+            
             Router.push('/');
         })
         .catch(err => {
             console.log(err);
-            updateLoading(false);
         });
     };
 
@@ -90,6 +90,8 @@ const SignIn = ({
                 className={classes.field}
                 label='Password*'
                 variant='outlined'
+                type='password'
+                onKeyDown={e => e.key === 'Enter' && handleSignIn()}
                 onChange={e => setPassword(e.target.value)}
             />
             <Button

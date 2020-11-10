@@ -11,14 +11,22 @@ const initialState = {
     buyingPower: null,
     uid: undefined,
     stockInfo: undefined,
+    initialRender: true,
     portfolio: {},
     stockPrices: {},
+    watchList: [],
     transactions: [],
     totalStockWorth: 0,
 };
 
 const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) => {
     switch (action.type) {
+        case types.UPDATE_INITIAL_RENDER:
+            return {
+                ...state,
+                initialRender: false,
+            };
+
         case types.UPDATE_LOADING:
             return {
                 ...state,
@@ -115,6 +123,12 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
             return {
                 ...state,
                 stockPrices: action.stockPrices,
+            };
+
+        case types.UPDATE_WATCH_LIST:
+            return {
+                ...state,
+                watchList: action.watchList,
             };
 
         default:

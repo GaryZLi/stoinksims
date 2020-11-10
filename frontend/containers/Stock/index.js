@@ -3,17 +3,18 @@ import { connect } from 'react-redux';
 import BarChart from '../../components/BarChart';
 import LineChart from '../../components/LineChart';
 import Transaction from './Transaction';
+import CompanyInfo from './CompanyInfo';
 
 const useStyles = makeStyles({
     root: {
         width: '100%',
         minWidth: 900,
         display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
         paddingTop: 100,
-        paddingBottom: 100,
-        alignItems: 'center',
+        // alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 1,
+        position: 'relative',
     },
     noStock: {
         height: '100%',
@@ -24,8 +25,17 @@ const useStyles = makeStyles({
     },
     contentContainer: {
         width: 700,
-        marginLeft: 20,
         transition: 'all 1s ease-out',
+        display: 'flex',
+        flexDirection: 'column',
+        paddingBottom: 100,
+
+        paddingTop: 5,
+        paddingLeft: 20,
+        paddingRight: 20,
+        zIndex: 100,
+        overflow: 'auto',
+
     },
     chartContainer: {
         maxWidth: 700,
@@ -38,7 +48,6 @@ const Stock = ({
     chartType,
     sidePanelOpened,
     portfolio,
-    loading,
 }) => {
     const classes = useStyles();
 
@@ -55,22 +64,27 @@ const Stock = ({
             <div
                 className={classes.contentContainer}
                 style={{
-                    marginRight: sidePanelOpened
-                        ? 250
-                        : 64,
+                    // marginRight: sidePanelOpened
+                        // ? 250
+                        // : 64,
                 }}
             >
                 {chartType === 'Price'
                     ? <LineChart range={65} />
                     : <BarChart range={65} />
                 }
-                <Transaction
-                    symbol={stockInfo.symbol}
-                    sidePanelOpened={sidePanelOpened}
-                    price={stockInfo.close}
-                    shares={portfolio[stockInfo.symbol]}
-                />
+                <CompanyInfo/>
             </div>
+            <Transaction
+                style={{
+                    position: 'sticky',
+                    top: 0,
+                }}
+                symbol={stockInfo.symbol}
+                sidePanelOpened={sidePanelOpened}
+                price={stockInfo.close}
+                shares={portfolio[stockInfo.symbol]}
+            />
         </div>
     );
 };
@@ -80,13 +94,11 @@ const mapStateToProps = ({
     chartType,
     sidePanelOpened,
     portfolio,
-    loading,
 }) => ({
     stockInfo,
     chartType,
     sidePanelOpened,
     portfolio,
-    loading,
 });
 
 export default connect(mapStateToProps)(Stock);

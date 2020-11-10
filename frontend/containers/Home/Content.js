@@ -7,6 +7,7 @@ import {
 import Table from '../../components/Table';
 import Card from '../../components/Card';
 import GaugeCard from '../../components/GaugeCard';
+import Heading from './Heading';
 
 const useStyles = makeStyles({
     root: {
@@ -14,10 +15,6 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-    },
-    intro: {
-        padding: 10,
-        display: 'inline-block',
     },
     gauge: {
         display: 'flex',        
@@ -52,7 +49,6 @@ const useStyles = makeStyles({
 });
 
 const Content = ({
-    firstName,
     buyingPower,
     totalStockWorth,
     stockPrices,
@@ -86,17 +82,7 @@ const Content = ({
 
     return (
         <div className={classes.root}>
-            <Paper
-                className={classes.intro}
-                elevation={7}
-            >
-                <Typography variant='h5'>
-                    Welcome to Stoink Sims, {firstName}!
-                </Typography>
-                <div>
-                    Stoink Sims is a simulator that mocks how the real life stock exchanges work. You can buy or sell any stocks available on the stock exchange.
-                </div>
-            </Paper>
+            <Heading/>
             <div className={classes.container}>
                 <Paper 
                     className={classes.gauge}
@@ -154,12 +140,10 @@ const Content = ({
 };
 
 const states = ({
-    firstName,
     buyingPower,
     totalStockWorth,
     stockPrices,
 }) => ({
-    firstName,
     buyingPower,
     totalStockWorth,
     stockPrices,

@@ -22,7 +22,10 @@ import { connect } from 'react-redux';
 const useStyles = makeStyles({
     root: {
         width: 250,
-        margin: '100px auto 0px auto',
+        minWidth: 250,
+        maxHeight: 270,
+        marginRight: 20,
+        // margin: '100px auto 0px auto',
         display: 'flex',
         flexDirection: 'column',
     },
@@ -61,6 +64,7 @@ const useStyles = makeStyles({
 });
 
 const Transaction = ({
+    style,
     uid,
     symbol,
     price,
@@ -149,6 +153,7 @@ const Transaction = ({
         <Paper
             className={classes.root}
             elevation={7}
+            style={style}
         >
             <List className={classes.heading}>
                 <ListItem
@@ -157,7 +162,7 @@ const Transaction = ({
                     style={{
                         color: state === 'Buy'
                             ? 'blue'
-                            : 'black'
+                            : 'black',
                     }}
                     onClick={() => changeState('Buy')}
                 >

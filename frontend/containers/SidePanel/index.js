@@ -14,7 +14,6 @@ import {
 import {
     ChevronLeft,
     ChevronRight,
-    MonetizationOnOutlined,
     HomeOutlined,
     History,
 } from '@material-ui/icons';
@@ -35,6 +34,7 @@ const useStyles = makeStyles({
         borderBottomRightRadius: 10,
         borderTopLeftRadius: 0,
         borderBottomLeftRadius: 0,
+
     },
     greetingText: {
         display: 'flex',
@@ -54,6 +54,9 @@ const useStyles = makeStyles({
         marginRight: 20,
         marginLeft: 4,
     },
+    logo: {
+        maxWidth: 30
+    }
 });
 
 const getTimeOfDay = hour => {
@@ -69,7 +72,6 @@ const getTimeOfDay = hour => {
 };
 
 const SidePanel = ({
-    // uid,
     firstName,
     lastName,
     sidePanelOpened,
@@ -81,14 +83,9 @@ const SidePanel = ({
     
     const listItems = [
         {
-            icon: <HomeOutlined />,
+            icon: <HomeOutlined/>,
             href: '/',
             component: <ListItemText primary='Home' />,
-        },
-        {
-            icon: <MonetizationOnOutlined />,
-            href: 'portfolio',
-            component: <ListItemText primary='Portfolio' />,
         },
         {
             icon: <History />,
@@ -113,9 +110,20 @@ const SidePanel = ({
                 {sidePanelOpened ? <ChevronLeft /> : <ChevronRight />}
             </IconButton>
             <div className={classes.greetingText}>
-                {sidePanelOpened && `
-                    Good ${getTimeOfDay(new Date().getHours())}, ${firstName} ${lastName}
-                `}
+                {sidePanelOpened
+                    ? (
+
+                        `
+                        Good ${getTimeOfDay(new Date().getHours())}, ${firstName} ${lastName}
+                        `
+                    )
+                    : (
+                        <img 
+                            className={classes.logo}
+                            src='/money.png' alt='logo'
+                        />
+                    )
+                }
             </div>
             <Divider />
             <List>
@@ -140,12 +148,10 @@ const SidePanel = ({
 };
 
 const mapStateToProps = ({
-    // uid,
     firstName,
     lastName,
     sidePanelOpened,
 }) => ({
-    // uid,
     firstName,
     lastName,
     sidePanelOpened,

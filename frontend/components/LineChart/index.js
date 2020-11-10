@@ -14,6 +14,7 @@ import {
     Tooltip, 
 } from 'recharts';
 import ChartActionButton from '../ChartActionButton';
+import WatchListButton from '../WatchListButton';
 
 const useStyles = makeStyles({
     root: {
@@ -50,6 +51,7 @@ const LineChart = ({
                 className={classes.title}
                 variant='h4'
             >
+                <WatchListButton stock={symbol}/>
                 {symbol}
                 <ChartActionButton/>
             </Typography>

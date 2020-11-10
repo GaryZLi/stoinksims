@@ -5,6 +5,9 @@ import Logo from './Logo';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import ForgotPassword from './ForgotPassword';
+import {
+    GitHub,
+} from '@material-ui/icons';
 
 const useStyles = makeStyles({
     root: {
@@ -18,6 +21,15 @@ const useStyles = makeStyles({
     },
     loginContainer: {
         width: 300,
+    },
+    footer: {
+        bottom: 20,
+        width: 200,
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        color: 'white',
+        position: 'fixed',
+
     }
 });
 
@@ -41,6 +53,13 @@ const Login = ({
                 <Logo/>
                 {landingStates[landingState]}
             </Paper>
+            <a 
+                className={classes.footer} 
+                href='https://github.com/GaryZLi'
+            >
+                <GitHub/>
+                Made by Gary Li
+            </a>
         </div>
     );
 };
