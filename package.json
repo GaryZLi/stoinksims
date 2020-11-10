@@ -5,11 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dev": "next dev",
-    "frontend": "next",
     "start": "next start",
-    "build": "next build",
-    "server": "nodemon -r esm trash/testServer.js",
-    "test": "node -r esm trash/test.js"
+    "build": "next build"
   },
   "keywords": [],
   "author": "",
