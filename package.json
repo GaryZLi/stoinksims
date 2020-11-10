@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon -r esm server.js",
     "frontend": "next",
-    "start": "nodemon -r esm server.js",
+    "start": "cross-env NODE_ENV=production node -r esm server.js",
     "build": "next build",
     "server": "nodemon -r esm trash/testServer.js",
     "test": "node -r esm trash/test.js"
@@ -20,6 +20,7 @@
     "@material-ui/styles": "^4.10.0",
     "axios": "^0.21.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
