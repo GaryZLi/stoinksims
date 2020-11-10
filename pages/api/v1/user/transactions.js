@@ -1,9 +1,10 @@
-import pool from '../../../../backend/database/database';
+const withMiddleware = require('../../../../utils/middleware');
+const pool = require('../../../../database/database');
 
-const transactionsHandler = (req, res) => {
+const transactionsHandler = async (req, res) => {
     const { uid } = req.body;
 
-    pool
+    const results = await pool
         .query(
             `
             select *
@@ -12,8 +13,10 @@ const transactionsHandler = (req, res) => {
             `,
             [uid]
         )
-        .then(results => res.status(200).send(results.rows))
+        .then(results => results)
         .catch(err => res.status(500).send(err));
+
+    res.status(200).send(results.rows);
 };
 
-export default transactionsHandler;
+module.exports = withMiddleware(transactionsHandler);

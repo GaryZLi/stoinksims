@@ -1,6 +1,9 @@
-import pool from '../../../../backend/database/database';
+// import pool from '../../../../database/database';
 
-export const addWatchListHandler = async (req, res) => {
+const withMiddleware = require('../../../../../utils/middleware');
+const pool = require('../../../../../database/database');
+
+const watchListHandler = async (req, res) => {
     const {
         uid,
         stock,
@@ -25,7 +28,7 @@ export const addWatchListHandler = async (req, res) => {
                 insert into watchlist(uid, symbol)
                 values($1, $2)
                 `
-            ,
+                ,
                 [uid, stock]
             )
             .then(() => res.status(200).send())
@@ -36,18 +39,4 @@ export const addWatchListHandler = async (req, res) => {
     }
 };
 
-export const getWatchListHandler = (req, res) => {
-    const { uid } = req.params;
-    
-    pool
-        .query(
-            `
-            select symbol
-            from watchlist
-            where uid=$1
-            `,
-            [uid]
-        )
-        .then(result => res.status(200).send(result.rows))
-        .catch(() => res.status(500).end());
-};
+module.exports = withMiddleware(watchListHandler);

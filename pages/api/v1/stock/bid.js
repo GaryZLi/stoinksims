@@ -1,5 +1,11 @@
-import pool from '../../../../backend/database/database';
-import { getPrice } from '../../../../backend/utils/iex';
+// import pool from '../../../../database/database';
+// import { getPrice } from '../../../../utils/iex';
+
+const pool = require('../../../../database/database');
+const {
+    getPrice,
+} = require('../../../../utils/iex');
+const withMiddleware = require('../../../../utils/middleware');
 
 const bidHandler = async (req, res) => {
     const {
@@ -129,4 +135,4 @@ const bidHandler = async (req, res) => {
         });
 };
 
-export default bidHandler;
+module.exports = withMiddleware(bidHandler);

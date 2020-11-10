@@ -1,8 +1,16 @@
-import { requestHistoricalData } from "../../../../backend/utils/historicalData";
-import { getTickerInfo } from '../../../../backend/utils/iex';
+// import { requestHistoricalData } from "../../../../utils/historicalData";
+// import { getTickerInfo } from '../../../../utils/iex';
+
+const {
+    requestHistoricalData
+} = require('../../../../utils/historicalData');
+const {
+    getTickerInfo
+} = require('../../../../utils/iex');
+const withMiddleware = require('../../../../utils/middleware');
 
 const tickerHandler = async (req, res) => {
-    const { ticker } = req.params;
+    const { ticker } = req.query;
 
     const chartData = await requestHistoricalData(ticker)
         .then(result => result)
@@ -21,7 +29,7 @@ const tickerHandler = async (req, res) => {
     // .send(testData);
 };
 
-export default tickerHandler;
+module.exports = withMiddleware(tickerHandler);
 
 // DELETE
 const testData = {

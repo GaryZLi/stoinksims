@@ -1,4 +1,5 @@
-import pool from '../../../../backend/database/database';
+const withMiddleware = require('../../../../utils/middleware');
+const pool = require('../../../../database/database');
 
 const infoHandler = (req, res) => {
 
@@ -17,4 +18,4 @@ const infoHandler = (req, res) => {
         .catch(err => res.status(500).send(err));
 };
 
-export default infoHandler;
+module.exports = withMiddleware(infoHandler);

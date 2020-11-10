@@ -1,19 +1,28 @@
-import { getIp } from '../../../../backend/utils/ip';
-import { signIn } from '../../../../backend/utils/firebase';
-import {
+// import { getIp } from '../../../../utils/ip';
+// import { signIn } from '../../../../utils/firebase';
+// import {
+//     updateWhitelist,
+// } from '../../../../utils/whitelist';
+
+const {
     updateWhitelist,
-} from '../../../../backend/utils/whitelist';
+} = require('../../../../utils/whitelist');
+const {
+    getIp,
+} = require('../../../../utils/ip');
+const {
+    signIn,
+} = require('../../../../utils/firebase');
 
+const signInHandler = async (req, res) => {
+    const { email, password } = req.body;
 
-const signInHandler = (req, res) => {
-    const {email, password} = req.body;
-
-    signIn(email, password)
-        .then(uid => {
-            updateWhitelist(getIp(req), uid);
-            res.status(200).send({uid});
-        })
+    const uid = await signIn(email, password)
+        .then(uid => uid)
         .catch(err => res.status(500).end());
+
+    updateWhitelist(getIp(req), uid);
+    res.status(200).send({ uid });
 };
 
-export default signInHandler;
+module.exports = signInHandler;

@@ -1,4 +1,5 @@
-import pg from 'pg';
+// import pg from 'pg';
+const pg = require('pg');
 
 const pool = new pg.Pool({
     user: process.env.AWS_USER,
@@ -8,4 +9,4 @@ const pool = new pg.Pool({
     database: process.env.AWS_DATABASE,
 });
 
-export default pool;
+module.exports = pool;

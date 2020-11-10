@@ -1,7 +1,18 @@
-import pool from '../../../../backend/database/database';
-import { updateWhitelist } from '../../../../backend/utils/whitelist';
-import { getIp } from '../../../../backend/utils/ip';
-import { signUp } from '../../../../backend/utils/firebase';
+// import pool from '../../../../database/database';
+// import { updateWhitelist } from '../../../../utils/whitelist';
+// import { getIp } from '../../../../utils/ip';
+// import { signUp } from '../../../../utils/firebase';
+
+const {
+    updateWhitelist,
+} = require('../../../../utils/whitelist');
+const {
+    getIp,
+} = require('../../../../utils/ip');
+const {
+    signUp,
+} = require('../../../../utils/firebase');
+const pool = require('../../../../database/database');
 
 const signUpHandler = (req, res) => {
     const {
@@ -11,27 +22,27 @@ const signUpHandler = (req, res) => {
         password,
     } = req.body;
 
-        signUp(email, password)
-        .then(uid => {
-            pool.query(
-                `
-                INSERT INTO Users(uid, firstName, lastName, buyingPower)
-                VALUES ($1, $2, $3, $4)
-                `,
-                [uid, firstName, lastName, 10000]
-            )
-                .then(() => {
-                    res
-                        .status(200)
-                        .send({
-                            uid: uid
-                        });
-
-                    updateWhitelist(getIp(req), uid);
-                })
-                .catch(err => res.status(500).send(err));
-        })
+    const uid = await signUp(email, password)
+        .then(uid => uid)
         .catch(err => res.status(500).send(err));
+
+    await pool.query(
+        `
+            INSERT INTO Users(uid, firstName, lastName, buyingPower)
+            VALUES ($1, $2, $3, $4)
+        `,
+        [uid, firstName, lastName, 10000]
+    )
+        .then()
+        .catch(err => res.status(500).send(err));
+
+    updateWhitelist(getIp(req), uid);
+    res
+        .status(200)
+        .send({
+            uid: uid
+        });
+
 };
 
-export default signUpHandler;
+module.exports = signUpHandler;

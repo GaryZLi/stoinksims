@@ -1,12 +1,12 @@
-import { 
-    isWhitelisted,
-} from '../../../../backend/utils/whitelist';
-import { getIp } from '../../../../backend/utils/ip';
+// import { 
+//     isWhitelisted,
+// } from '../../../../utils/whitelist';
+// import { getIp } from '../../../../utils/ip';
 
-const isLoggedInHandler = (req, res) => {
-    const uid = isWhitelisted(getIp(req));
+// const isLoggedInHandler = (req, res) => {
+//     const uid = isWhitelisted(getIp(req));
 
-    res.status(200).send({ uid });
-};
+//     res.status(200).send({ uid });
+// };
 
-export default isLoggedInHandler;
+// export default isLoggedInHandler;

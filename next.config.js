@@ -1,4 +1,6 @@
+const webpack = require('webpack');
 const firebase = require('firebase');
+require('dotenv').config();
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -13,3 +15,14 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+module.exports = {
+    webpack: config => {
+        const env = Object.keys(process.env).reduce((acc, curr) => {
+            acc[`process.env.${curr}`] = JSON.stringify(process.env[curr]);
+            return acc;
+        }, {});
+        config.plugins.push(new webpack.DefinePlugin(env));
+        return config;
+    }
+};

@@ -1,19 +1,22 @@
-import { getPrice } from '../../../../backend/utils/iex';
+const {
+    getPrice
+} = require('../../../../utils/iex');
+const withMiddleware = require('../../../../utils/middleware');
 
-const worthHandler = (req, res) => {
-    const {stocks} = req.body;
+const worthHandler = async (req, res) => {
+    const { stocks } = req.body;
 
-    Promise.all(stocks.map(stock => getPrice(stock)))
-    .then(result => {
-        const prices = {};
+    const result = await Promise.all(stocks.map(stock => getPrice(stock)))
+        .then(result => result)
+        .catch(() => res.status(500).end());
 
-        result.forEach((price, id) => prices[stocks[id]] = price);
+    const prices = {};
 
-        res
-            .status(200)
-            .send(prices);
-    })
-    .catch(() => res.status(500).end());
+    result.forEach((price, id) => prices[stocks[id]] = price);
+
+    res
+        .status(200)
+        .send(prices);
 };
 
-export default worthHandler;
+module.exports = withMiddleware(worthHandler);

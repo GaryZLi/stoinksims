@@ -1,5 +1,11 @@
-import pool from '../../../../backend/database/database';
-import { getPrice } from '../../../../backend/utils/iex';
+// import pool from '../../../../database/database';
+// import { getPrice } from '../../../../utils/iex';
+
+const pool = require('../../../../database/database');
+const withMiddleware = require('../../../../utils/middleware');
+const {
+    getPrice,
+} = require('../../../../utils/iex');
 
 const askHandler = async (req, res) => {
     const {
@@ -95,4 +101,4 @@ const askHandler = async (req, res) => {
         });
 };
 
-export default askHandler;
+module.exports = withMiddleware(askHandler);

@@ -1,24 +1,33 @@
-import { Router } from 'express';
-import authRoute from './auth';
-import userRoute from './user';
-import stockRoute from './stock';
-import { isWhitelisted } from '../../../backend/utils/whitelist';
-import { getIp } from '../../../backend/utils/ip';
+// import { Router } from 'express';
+// import authRoute from './auth';
+// import userRoute from './user';
+// import stockRoute from './stock';
+// import { isWhitelisted } from '../../../backend/utils/whitelist';
+// import { getIp } from '../../../backend/utils/ip';
 
-const router = new Router();
+// const withMiddleware = require('../../../utils/middleware');
 
-router.use('/auth', authRoute);
+// const router = new Router();
 
-router.use((req, res, next) => {
-    if (isWhitelisted(getIp(req)) !== undefined) {
-        next();
-    }
-    else {
-        res.status(401).end();
-    }
-})
+// router.use('/auth', authRoute);
 
-router.use('/user', userRoute);
-router.use('/stock', stockRoute);
+// router.use((req, res, next) => {
+//     if (isWhitelisted(getIp(req)) !== undefined) {
+//         next();
+//     }
+//     else {
+//         res.status(401).end();
+//     }
+// })
 
-export default router;
+// router.use('/user', userRoute);
+// router.use('/stock', stockRoute);
+
+// export default router;
+
+// function handler (req, res) {
+//     console.log(req.method)
+//     res.send('3dd33')
+// }
+
+// export default withMiddleware(handler);
