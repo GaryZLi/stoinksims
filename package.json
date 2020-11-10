@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon -r esm server.js",
     "frontend": "next",
-    "start": "next start",
+    "start": "nodemon -r esm server.js",
     "build": "next build",
     "server": "nodemon -r esm trash/testServer.js",
     "test": "node -r esm trash/test.js"
