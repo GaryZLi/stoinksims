@@ -15,6 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+console.log(firebase)
 
 module.exports = {
     webpack: config => {
