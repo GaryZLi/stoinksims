@@ -19,7 +19,7 @@ const tickerHandler = async (req, res) => {
     const tickerInfo = await getTickerInfo(ticker)
         .then(result => result)
         .catch(() => undefined);
-
+        
     if (!(chartData || tickerInfo)) return res.status(500).end();
 
         res

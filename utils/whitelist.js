@@ -3,9 +3,8 @@ const pool = require('../database/database');
 const whitelist = {};
 
 const isWhitelisted = async ip => {
-console.log('neha')
     if (whitelist[ip]) return whitelist[ip];
-console.log('heahh--')
+
     const uid = await pool
         .query(
             `

@@ -79,3 +79,13 @@ export const updateWatchList = watchList => ({
 export const updateInitialRender = () => ({
     type: types.UPDATE_INITIAL_RENDER
 });
+
+export const setMsg = info => ({
+    type: types.SET_MSG,
+    info,
+});
+
+export const setTransactionState = state => ({
+    type: types.SET_TRANSACTION_STATE,
+    state,
+});

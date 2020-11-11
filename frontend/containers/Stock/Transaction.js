@@ -12,6 +12,8 @@ import {
     updateLoading,
     updateBuyingPower,
     updateShares,
+    setMsg,
+    setTransactionState,
 } from '../../redux/actions';
 import {
     buyShares,
@@ -25,9 +27,9 @@ const useStyles = makeStyles({
         minWidth: 250,
         maxHeight: 270,
         marginRight: 20,
-        // margin: '100px auto 0px auto',
         display: 'flex',
         flexDirection: 'column',
+        paddingBottom: 10,
     },
     heading: {
         display: 'flex',
@@ -69,29 +71,28 @@ const Transaction = ({
     symbol,
     price,
     shares,
+    msg,
+    transactionState,
     buyingPower,
     updateLoading,
     updateBuyingPower,
     updateShares,
+    setMsg,
+    setTransactionState,
 }) => {
     const classes = useStyles();
-    const [state, setState] = useState('Buy');
     const [shareInput, setShareInput] = useState('');
-    const [msg, setMsg] = useState({
-        msg: '',
-        color: '',
-    });
 
     const handleClick = () => {
         if (!shareInput.length) return;
 
-        if (state === 'Sell' && (shareInput > shares || !shares)) {
+        if (transactionState === 'Sell' && (shareInput > shares || !shares)) {
             return setMsg({
                 msg: "You don't have enough shares!",
                 color: 'red',
             });
         }
-        else if (state === 'Buy') {
+        else if (transactionState === 'Buy') {
             updateLoading(true);
 
             buyShares(uid, symbol, shareInput)
@@ -115,7 +116,7 @@ const Transaction = ({
                     }
                 });
         }
-        else if (state === 'Sell') {
+        else if (transactionState === 'Sell') {
             updateLoading(true);
 
             askShares(uid, symbol, shareInput)
@@ -141,12 +142,12 @@ const Transaction = ({
         }
     };
 
-    const changeState = state => {
+    const changeState = transactionState => {
         setMsg({
             msg: '',
             color: '',
         });
-        setState(state);
+        setTransactionState(transactionState);
     };
 
     return (
@@ -160,7 +161,7 @@ const Transaction = ({
                     className={classes.listItem}
                     button
                     style={{
-                        color: state === 'Buy'
+                        color: transactionState === 'Buy'
                             ? 'blue'
                             : 'black',
                     }}
@@ -173,7 +174,7 @@ const Transaction = ({
                     className={classes.listItem}
                     button
                     style={{
-                        color: state === 'Sell'
+                        color: transactionState === 'Sell'
                             ? 'blue'
                             : 'black'
                     }}
@@ -214,7 +215,7 @@ const Transaction = ({
                     color='primary'
                     onClick={handleClick}
                 >
-                    {state}
+                    {transactionState}
                 </Button>
                 {msg.msg && (
                     <div
@@ -234,15 +235,21 @@ const Transaction = ({
 const mapStateToProps = ({
     buyingPower,
     uid,
+    msg,
+    transactionState,
 }) => ({
     buyingPower,
     uid,
+    msg,
+    transactionState,
 });
 
 const mapDispatchToProps = {
     updateLoading,
     updateBuyingPower,
     updateShares,
+    setMsg,
+    setTransactionState,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Transaction);

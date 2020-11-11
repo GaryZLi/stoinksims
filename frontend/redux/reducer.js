@@ -17,6 +17,11 @@ const initialState = {
     watchList: [],
     transactions: [],
     totalStockWorth: 0,
+    transactionState: 'Buy',
+    msg: {
+        msg: '',
+        color: '',
+    },
 };
 
 const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) => {
@@ -129,6 +134,18 @@ const mainReducer = (state = JSON.parse(JSON.stringify(initialState)), action) =
             return {
                 ...state,
                 watchList: action.watchList,
+            };
+
+        case types.SET_MSG:
+            return {
+                ...state,
+                msg: action.info,
+            };
+
+        case types.SET_TRANSACTION_STATE:
+            return {
+                ...state,
+                transactionState: action.state,
             };
 
         default:
