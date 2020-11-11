@@ -1,17 +1,17 @@
-import 'dotenv/config';
+// import 'dotenv/config';
 import axios from 'axios';
-import { parse } from 'node-html-parser';
-import { iex } from '../backend/utils/iex';
+// import { parse } from 'node-html-parser';
+// import { iex } from '../backend/utils/iex';
 
-import {
-  exec
-} from 'child_process';
+// import {
+//   exec
+// } from 'child_process';
 
-import {
-  parseHistoricalData, requestHistoricalData,
-} from '../backend/utils/historicalData';
+// import {
+//   parseHistoricalData, requestHistoricalData,
+// } from '../backend/utils/historicalData';
 
-import { getTickerInfo } from '../backend/utils/iex';
+// import { getTickerInfo } from '../backend/utils/iex';
 
 // const a = axios.post('http://localhost:5000/api/v1/user', {
 //   uid: 'VpqHAaPGDwRi54fRvJrPDITDek93'
@@ -45,7 +45,7 @@ import { getTickerInfo } from '../backend/utils/iex';
 
 // set_ip_address.configure([eth0, eth1]).then(() => console.log('done writing config files')).catch(err => err)
 
-axios.get('https://api.myip.com').then(Res => console.log(Res, '--')).catch(err => err)
+// axios.get('https://api.myip.com').then(Res => console.log(Res, '--')).catch(err => err)
 
 // var printTOR_IP = function () {
 
@@ -68,3 +68,13 @@ axios.get('https://api.myip.com').then(Res => console.log(Res, '--')).catch(err 
 //          printTOR_IP();
 //       }
 // });
+
+const ticker = 'amzn';
+axios
+        .get(`https://finance.yahoo.com/quote/${ticker}/history?p=${ticker}`)
+        .then(result => {
+            console.log(result.data)
+        })
+        .catch(err => {
+            throw err;
+        })

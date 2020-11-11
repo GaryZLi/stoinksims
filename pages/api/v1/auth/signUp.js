@@ -37,6 +37,7 @@ const signUpHandler = async (req, res) => {
         .catch(err => res.status(500).send(err));
 
     updateWhitelist(getIp(req), uid);
+
     res
         .status(200)
         .send({

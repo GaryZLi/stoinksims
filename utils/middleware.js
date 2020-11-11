@@ -1,6 +1,6 @@
 const {
     isWhitelisted,
-    updateWhitelist,
+    // updateWhitelist,
 } = require('../utils/whitelist');
 const {
     getIp,
@@ -8,7 +8,11 @@ const {
 
 const withMiddleware = handler => {
     return async (req, res) => {
-        if (isWhitelisted(getIp(req)) === undefined) {
+        const uid = await isWhitelisted(getIp(req))
+        .then(result => result)
+        .catch(() => res.status(500).end());
+
+        if (uid === undefined) {
             return res.status(401).end();
         }
 

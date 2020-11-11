@@ -11,7 +11,7 @@ const requestHistoricalData = ticker => (
 );
 
 const parseHistoricalData = html => {
-    const table = Array.from(requireparse(html).querySelector('tbody').childNodes)
+    const table = Array.from(parse(html).querySelector('tbody').childNodes)
     const result = [];
 
     for (let i = 0; i < 65; i++) {

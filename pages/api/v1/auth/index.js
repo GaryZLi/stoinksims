@@ -29,8 +29,12 @@ const {
     getIp,
 } = require('../../../../utils/ip');
 
-const isLoggedInHandler = (req, res) => {
-    const uid = isWhitelisted(getIp(req));
+const isLoggedInHandler = async (req, res) => {
+    const uid = await isWhitelisted(getIp(req))
+        .then(result => result)
+        .catch(err => {
+            res.status(500).end();
+        });
 
     res.status(200).send({ uid });
 };

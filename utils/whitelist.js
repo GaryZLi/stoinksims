@@ -1,18 +1,48 @@
+const pool = require('../database/database');
+
 const whitelist = {};
 
-const isWhitelisted = ip => {
-    return whitelist[ip];
+const isWhitelisted = async ip => {
+console.log('neha')
+    if (whitelist[ip]) return whitelist[ip];
+console.log('heahh--')
+    const uid = await pool
+        .query(
+            `
+            select uid
+            from logs
+            where ip=$1
+            `,
+            [ip]
+        )
+        .then(result => result.rows[0]?.uid)
+        .catch(err => {
+            throw err;
+        })
 
-    // return 'VpqHAaPGDwRi54fRvJrPDITDek93';
+    if (uid) {
+        whitelist[ip] = uid;
+    }   
+
+
+    return uid;
 };
 
 const updateWhitelist = (ip, uid) => {
     whitelist[ip] = uid;
-    
-//     setTimeout(() => {
-//         delete whitelist[ip];
-//         console.log(whitelist, 'after deleted');
-//     }, 1800000);
+
+    pool
+        .query(
+            `
+            insert into logs(uid, ip)
+            values($1, $2)
+            `,
+            [uid, ip]
+        )
+        .then()
+        .catch(err => {
+            throw err;
+        });
 };
 
 module.exports = {
