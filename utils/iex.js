@@ -2,10 +2,12 @@ const axios = require('axios');
 const { IEXCloudClient } = require("node-iex-cloud");
 
 const iex = new IEXCloudClient(axios, {
-    sandbox: true,
+    sandbox: false,
     publishable: process.env.IEX_PUBLISHABLE_KEY,
     version: "stable"
 });
+
+// process.env.NODE_ENV === 'development'
 
 const getTickerInfo = async ticker => {
     const companyInfo = await iex
@@ -42,8 +44,8 @@ const getTickerInfo = async ticker => {
 const getPrice = ticker => (
     iex.
         symbol(ticker)
-        .price()
-        .then(result => result)
+        .intradayPrices()
+        .then(result => result[result.length - 1].close)
         .catch(err => {
             throw err;
         })

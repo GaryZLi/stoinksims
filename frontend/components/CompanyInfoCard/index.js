@@ -22,7 +22,7 @@ const CompanyInfoCard = ({
                 {title}
             </div>
             <div>
-                {text}
+                {text.toLocaleString()}
             </div>
         </div>
     );
